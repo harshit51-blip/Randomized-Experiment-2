@@ -2,7 +2,7 @@ import random as r
 import math as m
 import msvcrt
 import matplotlib.pyplot as plt
-import operator
+import statistics
 
 
 def perturbation(lst,ind,ifactor,precision):
@@ -15,12 +15,18 @@ def diff(lst):
     diff = maximum - minimum
     return diff
 
-def plotting(x_list, y_list):
+def central_tendency(l):
+    arith_mean = statistics.mean(l)
+    
+    return round(arith_mean,4)
+    
+
+def plotting(x_list, y_list, ytitle):
     plt.plot(x_list, y_list)
-    plt.title('Data')
+    plt.title('Graph')
     plt.grid(True, which = 'both')
     plt.xlabel('Iterations')
-    plt.ylabel('V_d')
+    plt.ylabel(ytitle)
     plt.show()
     
 
@@ -31,10 +37,11 @@ precision = 4
 counter = 1
 x_plot = []
 y_plot = []
+arm = []
 
 for _ in range(n):
     while True:
-        ele = round(r.uniform(-100,100+1), precision)
+        ele = round(r.uniform(-10000,10000+1), precision)
         if ele not in lst_X:
             lst_X.append(ele)    
             break
@@ -42,6 +49,9 @@ for _ in range(n):
 lst_X.sort()
 
 lst_V = [round(m.sin(x), precision) for x in lst_X]
+
+arm.append(central_tendency(lst_V))
+
 
 V_d = diff(lst_V)
 x_plot.append(counter)
@@ -73,22 +83,27 @@ for E in range(iteration-1):
 
     counter+=1
 
+    arm.append(central_tendency(lst_V))
+
     V_d = diff(lst_V)
     x_plot.append(counter)
     y_plot.append(V_d)
 
     #counter+=1
-    
+
+plotting(x_plot, arm, ytitle = 'mean')
+
+  
 dV_d = []
 for d in range(len(y_plot)-1):
     diff_d = -(y_plot[d] - y_plot[d+1])
     dV_d.append(diff_d)
 
 
-plotting(x_plot, y_plot)
+plotting(x_plot, y_plot, ytitle = 'V_d')
 
 number = list(range(iteration-1))
-plotting(number, dV_d)
+plotting(number, dV_d, ytitle = 'dV_d')
 
 
 char = msvcrt.getch()
