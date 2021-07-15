@@ -1,4 +1,4 @@
-Some thoughts on the previous version of this code covered under the repository titled 'Randomized-Experiment':
+Some thoughts on the previous version of this code (basic write up is titled 'Randomized Periodic Walks') covered under the repository titled 'Randomized-Experiment':
 It was akin to taking a jar of particles whole and randomly placing it in a room. It was a random walk but with no real content, albeit a good learning curve.
 I came back to what I originally wanted to do: simulate a system with simple evolution and bring a random change in a particle of the system. 
 I have highlighted the basic setup of the system in the pdf available in this repository. I had to change the way V_x is initialized, 
